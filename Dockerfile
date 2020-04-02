@@ -28,7 +28,8 @@ RUN yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/rcs-5.9.
 # Setup the application home directory.
 ENV APP_HOME="/app"
 RUN mkdir $APP_HOME
-COPY ./bin/* $APP_HOME/
+COPY ./src $APP_HOME/src
+COPY ./bin $APP_HOME/bin
 
 # Create volume mount points.
 RUN mkdir -p /opt/viewvc
@@ -36,8 +37,8 @@ RUN mkdir -p /opt/svn
 RUN mkdir -p /opt/cvs
 
 # Build Subversion and friends.
-RUN /app/build-subversion-stack.sh
+RUN /app/bin/build-subversion-stack.sh
 
 STOPSIGNAL SIGTERM
 EXPOSE 80
-CMD ["/app/entrypoint.sh"]
+CMD ["/app/bin/entrypoint.sh"]

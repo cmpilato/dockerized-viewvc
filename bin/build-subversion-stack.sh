@@ -1,28 +1,35 @@
 #!/bin/sh
 
 PREVDIR=`pwd`
+cd ${APP_HOME}/src
 
-mkdir /tmp/__build__
-cd /tmp/__build__
 alternatives --set python /usr/bin/python2
 python -m pip install --user scons
 export PATH="/root/.local/bin:${PATH}"
 
 # py3c
-wget https://github.com/encukou/py3c/archive/v1.1.tar.gz -O- | tar xfz -
-mv py3c-1.1 py3c
+if [ ! -d py3c ]; then
+  wget https://github.com/encukou/py3c/archive/v1.1.tar.gz -O- | tar xfz -
+  mv py3c-1.1 py3c
+fi
 
 # sqlite
-wget https://sqlite.org/2020/sqlite-autoconf-3310100.tar.gz -O- | tar xfz -
-mv sqlite-autoconf-3310100 sqlite
+if [ ! -d sqlite ]; then
+  wget https://sqlite.org/2020/sqlite-autoconf-3310100.tar.gz -O- | tar xfz -
+  mv sqlite-autoconf-3310100 sqlite
+fi
 
 # libserf
-wget https://archive.apache.org/dist/serf/serf-1.3.9.tar.bz2 -O- | tar xfj -
-mv serf-1.3.9 serf
+if [ ! -d serf ]; then
+  wget https://archive.apache.org/dist/serf/serf-1.3.9.tar.bz2 -O- | tar xfj -
+  mv serf-1.3.9 serf
+fi
 
 # subversion (with python bindings)
-wget https://ftp.wayne.edu/apache/subversion/subversion-1.14.0.tar.bz2 -O- | tar xfj -
-mv subversion-1.14.0 subversion
+if [ ! -d subversion ]; then
+  wget https://ftp.wayne.edu/apache/subversion/subversion-1.14.0.tar.bz2 -O- | tar xfj -
+  mv subversion-1.14.0 subversion
+fi
 
 (cd py3c; cp -R include/* /usr/local/include)
 (cd sqlite; ./configure && make && make install)
@@ -34,4 +41,3 @@ mv subversion-1.14.0 subversion
 
 alternatives --set python /usr/bin/python3
 cd ${PREVDIR}
-rm -rf /tmp/__build__

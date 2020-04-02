@@ -1,0 +1,8 @@
+Drop into here source directories (exploded tarballs) of dependencies
+that are built by the build-subversion-stack.sh script (to avoid
+fetching them from the interwebs):
+
+   * py3c
+   * serf
+   * sqlite (autoconf package)
+   * subversion (1.14.0 or better)
