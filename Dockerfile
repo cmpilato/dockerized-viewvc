@@ -39,6 +39,7 @@ RUN mkdir -p /opt/cvs
 # Build Subversion and friends.
 RUN /app/bin/build-subversion-stack.sh
 
+ADD post-install /
 STOPSIGNAL SIGTERM
 EXPOSE 80
 CMD ["/app/bin/entrypoint.sh"]
