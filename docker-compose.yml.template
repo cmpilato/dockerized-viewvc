@@ -23,9 +23,12 @@ services:
     logging: *default-logging
     image: cmpilato/dockerized-viewvc:latest
     ports:
-      - "49152:49152"
+      - "8080:80"
     depends_on:
       - db
+    environment:
+      PYTHONPATH: /opt/viewvc/lib
+      VIEWVC_MODE: # Use either 'wsgi' or 'standalone' here.
     volumes:
       - /opt/svn:/opt/svn:ro
       - /opt/cvs:/opt/cvs:ro

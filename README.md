@@ -36,10 +36,17 @@ Configuring the Stack
 
 This stack gives you the optional of running ViewVC either using its
 Python-based standalone server, or as a WSGI application under Apache
-HTTP Server.  First copy the `docker-compose.yml.template` file to
-`docker-compose.yml`, then edit the YAML file to set the value of the
-`VIEWVC_MODE` environment variables to either `httpd` or `standalone`,
-as suits your desired mode of operation.
+HTTP Server.
+
+1. Copy the `docker-compose.yml.template` file to `docker-compose.yml`
+
+2. Edit the `docker-compose.yml` file to set the value of the
+   `VIEWVC_MODE` environment variable to either `wsgi` or
+   `standalone`, as suits your desired mode of operation.
+
+3. By default, the Docker stack will expose the service on host port
+   8080.  If you want to use a different port, replace 8080 with the
+   port of your choice in the "ports" mapping.
 
 
 Running the Stack
@@ -51,6 +58,8 @@ the stack in the background (daemon mode) using `docker-compose up
 -d`.
 
 Once the stack fully starts, you should be able to access ViewVC by
-hitting http://localhost:8080/viewvc in your web browser.
+hitting http://localhost:8080/viewvc in your web browser.  (If you
+configured the stack to expose the service on a different port than
+8080, then make the obvious port number substitution in that URL.)
 
 Stopping the browser is as simple as running `docker-compose down`.
