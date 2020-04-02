@@ -9,12 +9,10 @@ case ${VIEWVC_MODE} in
         exec python3 -u /opt/viewvc/bin/standalone.py --host 0.0.0.0 --port 80 --config-file /opt/viewvc/viewvc.conf 2>&1
         ;;
     wsgi)
+        rm -rf /run/httpd/* /tmp/httpd*
         exec /usr/sbin/apachectl -DFOREGROUND
         ;;
     *)
         echo "ERROR: Unsupported value for VIEWVC_MODE environment variable." 2>&1
         ;;
 esac
-
-    
-
