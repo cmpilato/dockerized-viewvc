@@ -10,7 +10,7 @@ case ${VIEWVC_MODE} in
         ;;
     wsgi)
         rm -rf /run/httpd/* /tmp/httpd*
-        exec /usr/sbin/apachectl -DFOREGROUND
+        exec /usr/sbin/httpd -DFOREGROUND
         ;;
     *)
         echo "ERROR: Unsupported value for VIEWVC_MODE environment variable." 2>&1
