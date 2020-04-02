@@ -1,0 +1,34 @@
+version: '3.4'
+
+x-logging:
+  &default-logging
+  options:
+    max-size: '1m'
+    max-file: '5'
+  driver: json-file
+x-logging:
+  &no-logging
+  driver: none
+services:
+  db:
+    logging: *no-logging
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - db-data:/var/lib/mysql
+  viewvc:
+    build: .
+    logging: *default-logging
+    image: cmpilato/dockerized-viewvc:latest
+    ports:
+      - "49152:49152"
+    depends_on:
+      - db
+    volumes:
+      - /opt/svn:/opt/svn:ro
+      - /opt/cvs:/opt/cvs:ro
+      - /opt/viewvc-master:/opt/viewvc:ro
+volumes:
+  db-data:
