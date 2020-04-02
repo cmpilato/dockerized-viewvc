@@ -1,7 +1,13 @@
-A Dockerized ViewVC stack.
+dockerized-viewvc
+=================
+
+A Dockerized ViewVC + SVN + CVS stack (for testing purposes)
+
+**NOTE: This project is for testing purposes only.**
+
 
 Requirements
-============
+------------
 
 This sucker uses Docker CE (17.09+) with support for Docker Compose
 file format 3.4.  For more information, see
@@ -9,7 +15,7 @@ https://docs.docker.com/compose/compose-file/compose-versioning/.
 
 
 Preparing the Environment
-=========================
+-------------------------
 
 After you clone the repository and have installed Docker, download all
 of the containers for the apps that will be run in Docker.
@@ -26,7 +32,7 @@ It gets built:
 
 
 Configuring the Stack
-=====================
+---------------------
 
 This stack gives you the optional of running ViewVC either using its
 Python-based standalone server, or as a WSGI application under Apache
@@ -37,7 +43,7 @@ as suits your desired mode of operation.
 
 
 Running the Stack
-=================
+-----------------
 
 Once you've built the primary container, pulled the dependency
 containers, and created your `docker-compose.yml` file, you can start
