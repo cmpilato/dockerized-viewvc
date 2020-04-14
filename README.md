@@ -41,8 +41,9 @@ HTTP Server.
 1. Copy the `docker-compose.yml.template` file to `docker-compose.yml`
 
 2. Edit the `docker-compose.yml` file to set the value of the
-   `VIEWVC_MODE` environment variable to either `wsgi` or
-   `standalone`, as suits your desired mode of operation.
+   `VIEWVC_MODE` environment variable to one of the following, as
+   suits your desired mode of operation:  `cgi`, `wsgi`, or
+   `standalone`
 
 3. By default, the Docker stack will expose the service on host port
    8080.  If you want to use a different port, replace 8080 with the

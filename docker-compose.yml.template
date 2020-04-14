@@ -28,7 +28,7 @@ services:
       - db
     environment:
       PYTHONPATH: /opt/viewvc/lib
-      VIEWVC_MODE: # Use either 'wsgi' or 'standalone' here.
+      VIEWVC_MODE: ### wsgi|cgi|standalone ###
     volumes:
       - /opt/svn:/opt/svn:ro
       - /opt/cvs:/opt/cvs:ro
