@@ -21,7 +21,7 @@ services:
   viewvc:
     build: .
     logging: *default-logging
-    image: cmpilato/dockerized-viewvc:latest
+    image: cmpilato/viewvc-testing:latest
     ports:
       - "8080:80"
     depends_on:

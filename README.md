@@ -25,11 +25,6 @@ of the containers for the apps that will be run in Docker.
 You'll need to repeat this command any time you want to fetch the
 latest version of these containers.
 
-The primary application container here, though, doesn't get pulled.
-It gets built:
-
-    $ docker-compose build
-
 
 Configuring the Stack
 ---------------------
@@ -64,3 +59,16 @@ configured the stack to expose the service on a different port than
 8080, then make the obvious port number substitution in that URL.)
 
 Stopping the browser is as simple as running `docker-compose down`.
+
+
+Building the Docker Image
+-------------------------
+
+Most folks won't need to bother with this, but should you need to
+rebuild the primary application container here, do this:
+
+    $ docker-compose build
+
+To publish a new version of the image, use:
+
+    $ docker-compose push viewvc
