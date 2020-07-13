@@ -24,7 +24,7 @@ RUN yum -y install apr-devel \
 RUN python3 -m pip install mysqlclient
 
 # Install CVS requirements.
-RUN yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/rcs-5.9.0-5.el7.x86_64.rpm
+RUN yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/rcs-5.9.0-7.el7.x86_64.rpm
 
 # Setup the application home directory.
 ENV APP_HOME="/app"
