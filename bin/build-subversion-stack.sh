@@ -8,6 +8,27 @@ alternatives --set python /usr/bin/python2
 python -m pip install --user scons
 export PATH="/root/.local/bin:${PATH}"
 
+# libserf
+if [ -d "serf" ]; then
+    echo "Using local py3c..."
+else
+    echo "Fetching serf..."
+    wget https://archive.apache.org/dist/serf/serf-1.3.9.tar.bz2 -O- | tar xfj -
+    mv serf-1.3.9 serf
+fi
+(cd serf; PYTHON=python2 scons && scons install)
+alternatives --set python /usr/bin/python3
+
+# mod_python
+if [ -d "mod_python" ]; then
+    echo "Using local mod_python..."
+else
+    echo "Fetching mod_python..."
+    wget https://fossies.org/linux/www/apache_httpd_modules/mod_python-3.5.0.tgz -O- | tar xfz -
+    mv mod_python-3.5.0 mod_python
+fi
+(cd mod_python; ./configure && make && make install)
+
 # py3c
 if [ -d "py3c" ]; then
     echo "Using local py3c..."
@@ -28,16 +49,6 @@ else
 fi
 (cd sqlite; ./configure && make && make install)
 
-# libserf
-if [ -d "serf" ]; then
-    echo "Using local py3c..."
-else
-    echo "Fetching serf..."
-    wget https://archive.apache.org/dist/serf/serf-1.3.9.tar.bz2 -O- | tar xfj -
-    mv serf-1.3.9 serf
-fi
-(cd serf; PYTHON=python2 scons && scons install)
-
 # subversion (with python bindings)
 if [ -d "subversion" ]; then
     echo "Using local subversion..."
@@ -51,5 +62,4 @@ fi
      && make install install-swig-py \
      && echo "/usr/local/lib/svn-python" > /usr/lib/python3.6/site-packages/svn.pth)
 
-alternatives --set python /usr/bin/python3
 cd ${PREVDIR}
