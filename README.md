@@ -61,6 +61,24 @@ configured the stack to expose the service on a different port than
 Stopping the browser is as simple as running `docker-compose down`.
 
 
+Running Multiple Modes Simultaneously
+-------------------------------------
+
+If you wish to simultaneously run multiple ViewVC instances of
+differing modes, Docker's compose support can handle that!
+
+1. Replicate the entire `viewvc` YAML block as many times as needed.
+
+2. Make sure to give unique names to each block.  There's nothing
+   magical about the name `viewvc`, so you might want call your blocks
+   `viewvc-cgi`, `viewvc-wsgi`, etc.
+
+3. As above, set the `VIEWVC_MODE` variable in each of your blocks.
+
+4. Finally, make sure you expose each service at a different port --
+   they can't all show up at 8080.
+
+
 Building the Docker Image
 -------------------------
 

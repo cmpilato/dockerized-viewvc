@@ -14,7 +14,8 @@ EOF
 case ${VIEWVC_MODE} in
     standalone)
         export PYTHONPATH=/opt/viewvc/lib
-        exec python3 -u /opt/viewvc/bin/standalone.py --host 0.0.0.0 --port 80 --config-file /opt/viewvc/viewvc.conf 2>&1
+        # Add -u here to run in Unicode mode.
+        exec python3 /opt/viewvc/bin/standalone.py --host 0.0.0.0 --port 80 --config-file /opt/viewvc/viewvc.conf 2>&1
         ;;
     wsgi)
         prepare_httpd wsgi
@@ -22,6 +23,12 @@ case ${VIEWVC_MODE} in
         ;;
     cgi)
         prepare_httpd cgi
+        exec /usr/sbin/httpd -DFOREGROUND
+        ;;
+    modpython)
+        # mod_wsgi and mod_python can't coexist.
+        rm /etc/httpd/conf.modules.d/*wsgi*
+        prepare_httpd modpython
         exec /usr/sbin/httpd -DFOREGROUND
         ;;
     *)
